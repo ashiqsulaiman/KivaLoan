@@ -41,8 +41,11 @@ class KivaLoanTableViewController: UITableViewController {
         var loans = [Loan]()
         
         do {
-            let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
             
+            // what ever data is recieved is converted into a dictionary type 
+            
+            let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+            print(jsonResult)
             
             //Parse Json Data
             
@@ -102,15 +105,16 @@ class KivaLoanTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KivaLoanTableViewCell
     // Configure the cell...
             
-            
+
             cell.useLabel.text = loans[indexPath.row].use
             cell.amountLabel.text = "$\(loans[indexPath.row].amount)"
             cell.nameLabel.text = loans[indexPath.row].name
             cell.countryLabel.text = loans[indexPath.row].country
-            
-            
         
         return cell
+        
+        
+        
     }
 
     
@@ -176,4 +180,8 @@ class KivaLoanTableViewController: UITableViewController {
     }
     */
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
 }
